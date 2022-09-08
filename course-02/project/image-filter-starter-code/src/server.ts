@@ -15,6 +15,27 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
   // GET /filteredimage?image_url={{URL}}
+app.get('/filteredimage/',async ( req: Request, res: Response) => {
+
+  try {
+    let { image_url } = req.query;
+
+    if ( !image_url ) {
+      return res.status(400)
+                .send(`image URL is required`);
+    }
+    const filteredImage:string = await filterImageFromURL(image_url)
+    
+    return res.status(200)
+              .sendFile(filteredImage, async()=>{
+                await deleteLocalFiles([filteredImage])
+              });
+    
+  } catch (error) {
+    return res.status(422).send('image process error')
+  }
+  
+})
   // endpoint to filter an image from a public url.
   // IT SHOULD
   //    1
