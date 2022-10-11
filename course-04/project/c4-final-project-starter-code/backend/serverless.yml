@@ -1,6 +1,6 @@
 org: nyakamwe
-app: serverless-todo-app
-service: serverless-todo-app
+app: serverless-todo-app-udagram
+service: serverless-todo-app-udagram
 
 plugins:
   - serverless-webpack
@@ -24,7 +24,7 @@ provider:
   environment:
     TODOS_TABLE: Todos-${self:provider.stage}
     TODOS_CREATED_AT_INDEX: CreatedAtIndex
-    ATTACHMENT_S3_BUCKET: udagram-serverless-todo-images-${self:provider.stage}
+    ATTACHMENT_S3_BUCKET: serverless-todo-images-${self:provider.stage}-udagram
     # SIGNED_URL_EXPIRATION: 300
   
   logs:
